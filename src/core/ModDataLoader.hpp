@@ -19,7 +19,8 @@ class ModDataLoader {
  public:
   /**
    * @brief Load manifest information (metadata and bundled load order rules)
-   * for all mods in the given folder.
+   * for all mods in the given path.
+   * If the given path is not a folder, no action is taken.
    *
    * @param ModManifestList modlist data to populate
    * @param modsFolder folder to scan for mods

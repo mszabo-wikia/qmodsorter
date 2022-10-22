@@ -9,6 +9,7 @@
 #include <QHBoxLayout>
 #include <QList>
 #include <QListView>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QStringListModel>
 #include <QVBoxLayout>
@@ -130,6 +131,21 @@ void MainWindow::onRefreshButtonClicked() {
 
   const auto gameInstallPath =
       fs::path(settings.getGameInstallPath().toStdString());
+
+  // While the workshop path is optional (it conceivably need not exist for
+  // non-Steam installs), it's not possible to load and sort a functional
+  // modlist without a valid game folder and rules DB file.
+  // So, notify the user if either of those are absent.
+  if (!fs::is_directory(gameInstallPath) ||
+      !fs::is_regular_file(settings.getDatabasePath().toStdString())) {
+    QMessageBox missingSettingsMessage;
+    missingSettingsMessage.setText(
+        "Game folder path or DB path is invalid or missing. Please verify your "
+        "settings.");
+    missingSettingsMessage.exec();
+    refreshButton->setDisabled(false);
+    return;
+  }
 
   modDataLoader.loadMods(mods, gameInstallPath / "Data");
   modDataLoader.loadMods(mods, gameInstallPath / "Mods");

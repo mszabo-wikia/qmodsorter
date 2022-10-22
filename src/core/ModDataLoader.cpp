@@ -5,6 +5,12 @@
 
 void ModDataLoader::loadMods(ModManifestList &modManifestList,
                              const fs::path &modsFolder) {
+  // Gracefully handle if the given path is not a valid directory
+  // (e.g. because the user does not have workshop mods)
+  if (!fs::is_directory(modsFolder)) {
+    return;
+  }
+
   for (const auto &entry : fs::directory_iterator(modsFolder)) {
     if (entry.is_directory()) {
       readAboutXml(entry.path(), modManifestList);
