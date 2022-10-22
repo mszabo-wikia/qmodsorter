@@ -2,6 +2,9 @@
 
 on: [push, pull_request]
 
+env:
+  CXX: g++
+
 jobs:
   build:
     name: Build & test
@@ -22,8 +25,6 @@ jobs:
         run: clang-format -n -Werror src/**/*.cpp src/**/*.hpp tests/**/*.cpp
 
       - name: Configure build
-        env:
-          CXX: clang
         run: |
           cmake -Bbuild -S . \
                 -DCMAKE_BUILD_TYPE=Debug \
@@ -31,11 +32,9 @@ jobs:
                 -G Ninja
 
       - name: Build
-        working-directory: ${{runner.workspace}}/build
-        run: ninja
+        run: cd build && ninja -j2
 
       - name: Run tests
         env:
           CTEST_OUTPUT_ON_FAILURE: 1
-        working-directory: ${{runner.workspace}}/build/tests
-        run: ctest -C ${{matrix.build_type}} -j 2
+        run: cd build/tests && ctest -C ${{matrix.build_type}} -j 2
