@@ -24,6 +24,13 @@ jobs:
       - name: Check format
         run: clang-format -n -Werror src/**/*.cpp src/**/*.hpp tests/**/*.cpp
 
+      - name: Cache build output
+        id: cache-build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build
+
       - name: Configure build
         run: |
           cmake -Bbuild -S . \
