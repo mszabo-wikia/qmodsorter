@@ -1,0 +1,41 @@
+﻿name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build & test
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: 6.4.*
+
+      - name: Install build dependencies
+        run: sudo apt-get install -y ninja-build
+
+      - name: Check format
+        run: clang-format -n -Werror src/**/*.cpp src/**/*.hpp tests/**/*.cpp
+
+      - name: Configure build
+        env:
+          CXX: clang
+        run: |
+          cmake -Bbuild -S . \
+                -DCMAKE_BUILD_TYPE=Debug \
+                -DQMODSORTER_BUILD_TESTS=ON \
+                -G Ninja
+
+      - name: Build
+        working-directory: ${{runner.workspace}}/build
+        run: ninja
+
+      - name: Run tests
+        env:
+          CTEST_OUTPUT_ON_FAILURE: 1
+        working-directory: ${{runner.workspace}}/build/tests
+        run: ctest -C ${{matrix.build_type}} -j 2
