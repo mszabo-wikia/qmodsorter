@@ -2,15 +2,10 @@
 
 #include <QFileDialog>
 #include <QHBoxLayout>
-#include <QLabel>
 #include <QPushButton>
-#include <QVBoxLayout>
 
-PathSelectorPanel::PathSelectorPanel(const QString &labelText,
-                                     const QString &defaultValue,
-                                     QWidget *parent)
-    : QWidget(parent), pathDisplayField(new QLineEdit()) {
-  auto label = new QLabel(labelText);
+PathSelectorPanel::PathSelectorPanel(const QString &defaultValue)
+    : pathDisplayField(new QLineEdit()) {
   pathDisplayField->setReadOnly(true);
   pathDisplayField->setText(defaultValue);
   auto pathSelectorButton = new QPushButton("Select");
@@ -19,12 +14,7 @@ PathSelectorPanel::PathSelectorPanel(const QString &labelText,
   inputLayout->addWidget(pathDisplayField);
   inputLayout->addWidget(pathSelectorButton);
 
-  auto mainLayout = new QVBoxLayout();
-  mainLayout->addWidget(label);
-  mainLayout->addLayout(inputLayout);
-  mainLayout->setContentsMargins(0, 0, 0, 0);
-
-  setLayout(mainLayout);
+  setLayout(inputLayout);
 
   connect(pathSelectorButton, &QPushButton::clicked, this,
           &PathSelectorPanel::onSelectPathButtonClicked);

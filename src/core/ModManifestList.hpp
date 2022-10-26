@@ -74,6 +74,8 @@ class ModManifestList {
    */
   const std::set<std::pair<QString, QString>> &getDependencies() const;
 
+  void clear();
+
  private:
   QMap<QString, ModManifest> modsByName;
   QMap<QString, ModManifest> modsByPackageId;

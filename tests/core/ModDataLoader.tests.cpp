@@ -9,14 +9,23 @@ TEST_CASE("ModDataLoader can load mod manifests", "[ModDataLoader]") {
 
   modDataLoader.loadMods(modManifestList, testModsFolder);
 
-  REQUIRE(modManifestList.getMods().size() == 2);
-  REQUIRE(modManifestList.getModByPackageId("just.a.packageid.is.fine")
-              .getName()
-              .toStdString() == "ModWithoutName");
+  REQUIRE(modManifestList.getMods().size() == 3);
 
-  REQUIRE(modManifestList.getModByPackageId("now.thats.a.proper.mod")
-              .getName()
-              .toStdString() == "A Proper Mod");
+  auto modWithJustPackageId =
+      modManifestList.getModByPackageId("just.a.packageid.is.fine");
+  REQUIRE(modWithJustPackageId.getName().toStdString() == "ModWithoutName");
+  REQUIRE(modWithJustPackageId.getFolder() ==
+          testModsFolder / "ModWithoutName");
+
+  auto properMod = modManifestList.getModByPackageId("now.thats.a.proper.mod");
+  REQUIRE(properMod.getName().toStdString() == "A Proper Mod");
+  REQUIRE(properMod.getDescription().toStdString() == "A proper description");
+  REQUIRE(properMod.getFolder() == testModsFolder / "ProperlyMadeMod");
+
+  auto modWithEncodedNewlines =
+      modManifestList.getModByPackageId("newlines.mod");
+  REQUIRE(modWithEncodedNewlines.getDescription().toStdString() ==
+          "A mod with some\nencoded newlines.");
 
   REQUIRE(modManifestList.getDependencies().contains(
       std::pair("a.dependency", "now.thats.a.proper.mod")));

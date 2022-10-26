@@ -1,0 +1,5 @@
+<ModMetaData>
+    <name>A mod with newlines in its description</name>
+    <packageId>newlines.mod</packageId>
+    <description>A mod with some\nencoded newlines.</description>
+</ModMetaData>

@@ -42,6 +42,10 @@ void ModDataLoader::readAboutXml(const fs::path &modFolder,
     } else if (xml.name() == QLatin1String("packageId")) {
       auto packageId = xml.readElementText();
       modManifest.setPackageId(packageId.toLower());
+    } else if (xml.name() == QLatin1String("description")) {
+      // Convert stray double-encoded newlines in descriptions to real newlines
+      auto description = xml.readElementText().replace("\\n", "\n");
+      modManifest.setDescription(description);
     } else if (xml.name() == QLatin1String("loadAfter")) {
       readLoadOrderRules(loadAfter);
     } else if (xml.name() == QLatin1String("loadBefore")) {
@@ -54,6 +58,8 @@ void ModDataLoader::readAboutXml(const fs::path &modFolder,
   if (modManifest.getPackageId().isEmpty()) {
     return;
   }
+
+  modManifest.setFolder(modFolder);
 
   // Some mods, such as Ludeon's own DLCs and core, may not have a name
   // specified. Fall back to the directory name for this case (and hope it's

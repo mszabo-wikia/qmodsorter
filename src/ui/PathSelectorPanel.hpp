@@ -16,12 +16,9 @@ class PathSelectorPanel : public QWidget {
    * @brief Construct a new widget instance with the given label and default
    * path.
    *
-   * @param labelText label to be attached to this widget
    * @param defaultValue default path
-   * @param parent Parent of this widget in the object tree (optional)
    */
-  PathSelectorPanel(const QString &labelText, const QString &defaultValue,
-                    QWidget *parent = nullptr);
+  PathSelectorPanel(const QString &defaultValue);
   /**
    * @brief Set whether this panel should select directories or files.
    *

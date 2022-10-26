@@ -40,3 +40,9 @@ const std::set<std::pair<QString, QString>> &ModManifestList::getDependencies()
     const {
   return dependencies;
 }
+
+void ModManifestList::clear() {
+  modsByName.clear();
+  modsByPackageId.clear();
+  dependencies.clear();
+}

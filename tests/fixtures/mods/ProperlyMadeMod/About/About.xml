@@ -1,6 +1,7 @@
 <ModMetaData>
     <name>A Proper Mod</name>
     <packageId>now.thats.a.proper.mod</packageId>
+    <description>A proper description</description>
     <loadBefore>
         <li>a.dependent</li>
     </loadBefore>

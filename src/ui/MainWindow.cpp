@@ -5,6 +5,7 @@
 #include <ModManifest.hpp>
 #include <ModManifestList.hpp>
 #include <ModNameListModel.hpp>
+#include <QFormLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
 #include <QList>
@@ -14,6 +15,7 @@
 #include <QStringListModel>
 #include <QVBoxLayout>
 
+#include "ModDetailsPanel.hpp"
 #include "PathSelectorPanel.hpp"
 
 MainWindow::MainWindow(Settings &settings, ModsConfig &modsConfig,
@@ -65,36 +67,40 @@ MainWindow::MainWindow(Settings &settings, ModsConfig &modsConfig,
   generalActionsLayout->addWidget(sortButton);
   generalActionsLayout->addWidget(saveButton);
 
-  auto mainHorizontalLayout = new QHBoxLayout();
-  mainHorizontalLayout->setSpacing(18);
-  mainHorizontalLayout->addWidget(disabledModsView);
-  mainHorizontalLayout->addLayout(buttonLayout);
-  mainHorizontalLayout->addWidget(enabledModsView);
-  mainHorizontalLayout->addLayout(generalActionsLayout);
-  mainHorizontalLayout->setContentsMargins(0, 18, 0, 0);
+  auto modManagementLayout = new QHBoxLayout();
+  modManagementLayout->setSpacing(18);
+  modManagementLayout->addWidget(disabledModsView);
+  modManagementLayout->addLayout(buttonLayout);
+  modManagementLayout->addWidget(enabledModsView);
+  modManagementLayout->addLayout(generalActionsLayout);
+  modManagementLayout->setContentsMargins(0, 18, 0, 0);
 
-  auto gamePathSelector =
-      new PathSelectorPanel("Game folder", settings.getGameInstallPath());
+  auto gamePathSelector = new PathSelectorPanel(settings.getGameInstallPath());
   gamePathSelector->setDirectorySelector(true);
-  auto workshopPathSelector =
-      new PathSelectorPanel("Workshop folder", settings.getWorkshopPath());
+  auto workshopPathSelector = new PathSelectorPanel(settings.getWorkshopPath());
   workshopPathSelector->setDirectorySelector(true);
-  auto dbPathSelector =
-      new PathSelectorPanel("DB path", settings.getDatabasePath());
+  auto dbPathSelector = new PathSelectorPanel(settings.getDatabasePath());
 
-  auto pathSelectorLayout = new QVBoxLayout();
-  pathSelectorLayout->addWidget(gamePathSelector);
-  pathSelectorLayout->addWidget(workshopPathSelector);
-  pathSelectorLayout->addWidget(dbPathSelector);
+  auto pathSelectorLayout = new QFormLayout();
+  pathSelectorLayout->addRow("Game folder", gamePathSelector);
+  pathSelectorLayout->addRow("Workshop path", workshopPathSelector);
+  pathSelectorLayout->addRow("DB path", dbPathSelector);
 
-  auto pathSelectorContainer = new QGroupBox("Game locations");
+  auto pathSelectorContainer = new QWidget();
   pathSelectorContainer->setLayout(pathSelectorLayout);
 
-  auto mainVerticalLayout = new QVBoxLayout();
-  mainVerticalLayout->addWidget(pathSelectorContainer);
-  mainVerticalLayout->addLayout(mainHorizontalLayout);
-  setMinimumWidth(1024);
+  auto modDetailsPanel = new ModDetailsPanel();
 
+  headerTabs = new QTabWidget();
+  headerTabs->addTab(pathSelectorContainer, "Game locations");
+  modDetailsTabIndex = headerTabs->addTab(modDetailsPanel, "Mod details");
+  headerTabs->setTabEnabled(modDetailsTabIndex, false);
+
+  auto mainVerticalLayout = new QVBoxLayout();
+  mainVerticalLayout->addWidget(headerTabs);
+  mainVerticalLayout->addLayout(modManagementLayout);
+
+  setMinimumWidth(1024);
   setLayout(mainVerticalLayout);
 
   connect(gamePathSelector, &PathSelectorPanel::pathSelected, this,
@@ -120,12 +126,20 @@ MainWindow::MainWindow(Settings &settings, ModsConfig &modsConfig,
   connect(disableAllModsButton, &QPushButton::clicked, this,
           [&]() { moveAllItems(enabledModsView, disabledModsView); });
 
+  connect(enabledModsView, &QListView::clicked, this,
+          &MainWindow::onModClickedInList);
+  connect(disabledModsView, &QListView::clicked, this,
+          &MainWindow::onModClickedInList);
+
+  connect(this, &MainWindow::selectedModChanged, modDetailsPanel,
+          &ModDetailsPanel::onSelectedModChanged);
+
   onRefreshButtonClicked();
 }
 
 void MainWindow::onRefreshButtonClicked() {
   DependencyDatabaseLoader dependencyDatabaseLoader(settings);
-  mods = ModManifestList();
+  mods.clear();
 
   refreshButton->setDisabled(true);
 
@@ -231,4 +245,15 @@ void MainWindow::moveAllItems(QListView *sourceView, QListView *targetView) {
   }
 
   sourceModel->removeRows(0, sourceModel->rowCount());
+}
+
+void MainWindow::onModClickedInList(const QModelIndex &selected) {
+  auto sourceModel = selected.model();
+  auto modName = sourceModel->data(selected).toString();
+
+  if (mods.hasModNamed(modName)) {
+    headerTabs->setTabEnabled(modDetailsTabIndex, true);
+    emit selectedModChanged(mods.getModByName(modName));
+    headerTabs->setCurrentIndex(modDetailsTabIndex);
+  }
 }
