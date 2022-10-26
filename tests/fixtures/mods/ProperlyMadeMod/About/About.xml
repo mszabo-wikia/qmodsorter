@@ -1,0 +1,10 @@
+<ModMetaData>
+    <name>A Proper Mod</name>
+    <packageId>now.thats.a.proper.mod</packageId>
+    <loadBefore>
+        <li>a.dependent</li>
+    </loadBefore>
+    <loadAfter>
+        <li>a.dependency</li>
+    </loadAfter>
+</ModMetaData>
