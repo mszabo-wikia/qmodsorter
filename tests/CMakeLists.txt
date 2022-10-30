@@ -7,11 +7,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(catch2)
 
 add_executable(tests
-  core/DependencyGraph.tests.cpp
+  graph/DependencyGraph.tests.cpp
   core/SettingsLoader.tests.cpp
   core/ModDataLoader.tests.cpp
 )
-target_link_libraries(tests PRIVATE qmodsorter-core Qt::Core Catch2::Catch2WithMain)
+target_link_libraries(tests PRIVATE qmodsorter-core qmodsorter-graph Qt::Core Catch2::Catch2WithMain)
 
 include(Catch)
 catch_discover_tests(tests)

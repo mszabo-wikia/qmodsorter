@@ -6,7 +6,6 @@ add_library(qmodsorter-core
     ModsConfigLoader.cpp ModsConfigLoader.hpp
     ModManifestList.cpp ModManifestList.hpp
     DependencyDatabaseLoader.cpp DependencyDatabaseLoader.hpp
-    DependencyGraph.cpp DependencyGraph.hpp
 )
 
 target_link_libraries(qmodsorter-core PRIVATE Qt6::Core)

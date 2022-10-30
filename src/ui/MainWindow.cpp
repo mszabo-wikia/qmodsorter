@@ -1,5 +1,6 @@
 #include "MainWindow.hpp"
 
+#include <CircularDependencies.hpp>
 #include <DependencyDatabaseLoader.hpp>
 #include <DependencyGraph.hpp>
 #include <ModManifest.hpp>
@@ -15,6 +16,7 @@
 #include <QStringListModel>
 #include <QVBoxLayout>
 
+#include "CircularDependenciesDialog.hpp"
 #include "ModDetailsPanel.hpp"
 #include "PathSelectorPanel.hpp"
 
@@ -152,7 +154,7 @@ void MainWindow::onRefreshButtonClicked() {
   // So, notify the user if either of those are absent.
   if (!fs::is_directory(gameInstallPath) ||
       !fs::is_regular_file(settings.getDatabasePath().toStdString())) {
-    QMessageBox missingSettingsMessage;
+    QMessageBox missingSettingsMessage(this);
     missingSettingsMessage.setText(
         "Game folder path or DB path is invalid or missing. Please verify your "
         "settings.");
@@ -192,15 +194,25 @@ void MainWindow::onRefreshButtonClicked() {
 void MainWindow::onSortButtonClicked() {
   sortButton->setDisabled(true);
   QStringList activeModIds;
+  QStringList sortedModNames;
 
   for (const auto &activeModName : enabledModsModel->stringList()) {
     activeModIds.push_back(mods.getModByName(activeModName).getPackageId());
   }
 
-  DependencyGraph graph(activeModIds, modsConfig.getKnownExpansions(), mods);
+  DependencyGraph graph(activeModIds, modsConfig.getKnownExpansions(),
+                        mods.getDependencies());
 
-  auto sortedModNames = graph.getSortedModNames();
-  enabledModsModel->setStringList(sortedModNames);
+  try {
+    for (const auto &packageId : graph.getSortedPackageIds()) {
+      auto modName = mods.getModByPackageId(packageId).getName();
+      sortedModNames.push_back(modName);
+    }
+    enabledModsModel->setStringList(sortedModNames);
+  } catch (const CircularDependencies &circularDependencies) {
+    CircularDependenciesDialog dialog(circularDependencies, mods, this);
+    dialog.exec();
+  }
 
   sortButton->setDisabled(false);
 }
