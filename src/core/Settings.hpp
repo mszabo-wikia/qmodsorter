@@ -3,6 +3,8 @@
 
 #include <QString>
 
+namespace qmodsorter {
+
 /**
  * @brief Holds application-specific configuration options.
  */
@@ -26,5 +28,7 @@ class Settings {
   QString databasePath;
   QString workshopPath;
 };
+
+}  // namespace qmodsorter
 
 #endif

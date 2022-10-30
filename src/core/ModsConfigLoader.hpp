@@ -7,6 +7,8 @@
 
 #include "ModsConfig.hpp"
 
+namespace qmodsorter {
+
 namespace fs = std::filesystem;
 
 /**
@@ -36,5 +38,7 @@ class ModsConfigLoader {
   void readActiveMods(ModsConfig &modsConfig);
   void readKnownExpansions(ModsConfig &modsConfig);
 };
+
+}  // namespace qmodsorter
 
 #endif

@@ -5,6 +5,8 @@
 
 #include "ModsConfig.hpp"
 
+namespace qmodsorter {
+
 ModsConfigLoader ModsConfigLoader::newWithDefaultConfigPath() {
   // TODO: Should this be configurable?
   // AFAIK there is no way to have the game use another path.
@@ -92,3 +94,5 @@ void ModsConfigLoader::saveModsConfig(const ModsConfig &modsConfig) {
 
   xmlWriter.writeEndDocument();
 }
+
+}  // namespace qmodsorter

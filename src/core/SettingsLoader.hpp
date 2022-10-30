@@ -7,6 +7,8 @@
 
 #include "Settings.hpp"
 
+namespace qmodsorter {
+
 namespace fs = std::filesystem;
 
 /**
@@ -31,5 +33,7 @@ class SettingsLoader {
   QXmlStreamReader xmlReader;
   QXmlStreamWriter xmlWriter;
 };
+
+}  // namespace qmodsorter
 
 #endif

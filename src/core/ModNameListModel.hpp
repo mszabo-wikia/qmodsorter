@@ -3,6 +3,8 @@
 
 #include <QStringListModel>
 
+namespace qmodsorter {
+
 /**
  * @brief Qt model holding a set of mod names.
  */
@@ -21,4 +23,5 @@ class ModNameListModel : public QStringListModel {
   }
 };
 
+}  // namespace qmodsorter
 #endif

@@ -2,6 +2,8 @@
 #include <ModManifestList.hpp>
 #include <catch2/catch_test_macros.hpp>
 
+using namespace qmodsorter;
+
 TEST_CASE("ModDataLoader can load mod manifests", "[ModDataLoader]") {
   ModDataLoader modDataLoader;
   ModManifestList modManifestList;

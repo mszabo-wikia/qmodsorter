@@ -6,6 +6,8 @@
 #include <QPixmap>
 #include <QScrollArea>
 
+namespace qmodsorter {
+
 ModDetailsPanel::ModDetailsPanel()
     : QWidget(),
       modImage(new QLabel()),
@@ -87,3 +89,5 @@ void ModDetailsPanel::onSelectedModChanged(const ModManifest &selectedMod) {
   path->setText(pathLink);
   description->setText(selectedMod.getDescription());
 }
+
+}  // namespace qmodsorter

@@ -3,6 +3,8 @@
 #include "ModManifest.hpp"
 #include "ModManifestList.hpp"
 
+namespace qmodsorter {
+
 void ModDataLoader::loadMods(ModManifestList &modManifestList,
                              const fs::path &modsFolder) {
   // Gracefully handle if the given path is not a valid directory
@@ -90,3 +92,5 @@ void ModDataLoader::readLoadOrderRules(std::vector<QString> &loadOrderRules) {
     }
   }
 }
+
+}  // namespace qmodsorter

@@ -4,6 +4,8 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 
+namespace qmodsorter {
+
 PathSelectorPanel::PathSelectorPanel(const QString &defaultValue)
     : pathDisplayField(new QLineEdit()) {
   pathDisplayField->setReadOnly(true);
@@ -38,3 +40,5 @@ void PathSelectorPanel::onSelectPathButtonClicked() {
     emit pathSelected(pathName);
   }
 }
+
+}  // namespace qmodsorter

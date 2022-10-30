@@ -16,6 +16,8 @@
 
 #include "ModManifest.hpp"
 
+namespace qmodsorter {
+
 class MainWindow : public QWidget {
   Q_OBJECT
 
@@ -55,5 +57,7 @@ class MainWindow : public QWidget {
   void moveSelectedItems(QListView *sourceView, QListView *targetView);
   void moveAllItems(QListView *sourceView, QListView *targetView);
 };
+
+}  // namespace qmodsorter
 
 #endif

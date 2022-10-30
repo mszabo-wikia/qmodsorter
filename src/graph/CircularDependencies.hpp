@@ -4,6 +4,8 @@
 #include <QString>
 #include <vector>
 
+namespace qmodsorter {
+
 /**
  * @brief Holds a set of circular dependencies discovered in a dependency graph
  */
@@ -26,5 +28,7 @@ class CircularDependencies : public std::exception {
  private:
   std::vector<CircularDependency> circles;
 };
+
+}  // namespace qmodsorter
 
 #endif

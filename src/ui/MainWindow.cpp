@@ -20,6 +20,8 @@
 #include "ModDetailsPanel.hpp"
 #include "PathSelectorPanel.hpp"
 
+namespace qmodsorter {
+
 MainWindow::MainWindow(Settings &settings, ModsConfig &modsConfig,
                        ModsConfigLoader &modsConfigLoader)
     : settings(settings),
@@ -269,3 +271,5 @@ void MainWindow::onModClickedInList(const QModelIndex &selected) {
     headerTabs->setCurrentIndex(modDetailsTabIndex);
   }
 }
+
+}  // namespace qmodsorter

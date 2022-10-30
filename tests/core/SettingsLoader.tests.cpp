@@ -2,6 +2,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <filesystem>
 
+using namespace qmodsorter;
+
 TEST_CASE("SettingsLoader can load and save settings", "[SettingsLoader]") {
   auto settingsPath = fs::current_path() / "fixtures";
 

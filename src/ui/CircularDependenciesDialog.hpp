@@ -5,6 +5,8 @@
 #include <ModManifestList.hpp>
 #include <QDialog>
 
+namespace qmodsorter {
+
 /**
  * @brief Dialog to render a basic breakdown of circular dependencies found
  * while sorting.
@@ -17,5 +19,7 @@ class CircularDependenciesDialog : public QDialog {
                              const ModManifestList& modManifestList,
                              QWidget* parent = nullptr);
 };
+
+}  // namespace qmodsorter
 
 #endif

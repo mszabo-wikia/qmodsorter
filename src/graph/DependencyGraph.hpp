@@ -9,6 +9,8 @@
 #include "CircularDependencies.hpp"
 #include "Node.hpp"
 
+namespace qmodsorter {
+
 class DependencyGraph {
  public:
   DependencyGraph(const QStringList &activeModIds,
@@ -32,5 +34,7 @@ class DependencyGraph {
   void depthFirstTraverse(Node *root,
                           CircularDependencies &circularDependencies);
 };
+
+}  // namespace qmodsorter
 
 #endif

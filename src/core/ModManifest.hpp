@@ -4,6 +4,8 @@
 #include <QString>
 #include <filesystem>
 
+namespace qmodsorter {
+
 namespace fs = std::filesystem;
 
 /**
@@ -30,4 +32,5 @@ class ModManifest {
   fs::path folder;
 };
 
+}  // namespace qmodsorter
 #endif

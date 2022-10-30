@@ -2,6 +2,8 @@
 
 #include "ModManifest.hpp"
 
+namespace qmodsorter {
+
 const ModManifest ModManifestList::getModByName(const QString &name) const {
   return modsByName.value(name);
 }
@@ -46,3 +48,5 @@ void ModManifestList::clear() {
   modsByPackageId.clear();
   dependencies.clear();
 }
+
+}  // namespace qmodsorter

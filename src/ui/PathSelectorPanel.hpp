@@ -4,6 +4,8 @@
 #include <QLineEdit>
 #include <QWidget>
 
+namespace qmodsorter {
+
 /**
  * @brief Widget that allows selecting a filesystem path via a dialog and
  * displays it inline.
@@ -40,5 +42,7 @@ class PathSelectorPanel : public QWidget {
   QLineEdit *pathDisplayField;
   bool isDirectorySelector;
 };
+
+}  // namespace qmodsorter
 
 #endif

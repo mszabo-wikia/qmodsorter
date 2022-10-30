@@ -4,6 +4,8 @@
 #include <QLabel>
 #include <QPushButton>
 
+namespace qmodsorter {
+
 CircularDependenciesDialog::CircularDependenciesDialog(
     const CircularDependencies& circularDependencies,
     const ModManifestList& modManifestList, QWidget* parent)
@@ -53,3 +55,5 @@ CircularDependenciesDialog::CircularDependenciesDialog(
 
   setLayout(mainLayout);
 }
+
+}  // namespace qmodsorter

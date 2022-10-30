@@ -2,6 +2,8 @@
 
 #include <QDir>
 
+namespace qmodsorter {
+
 SettingsLoader SettingsLoader::newWithDefaultFolder() {
   auto defaultSettingsFolder = fs::path(QDir::homePath().toStdString()) /
                                ".local" / "share" / "qmodsorter";
@@ -50,3 +52,5 @@ void SettingsLoader::saveSettings(const Settings &settings) {
   xmlWriter.writeTextElement("databasePath", settings.getDatabasePath());
   xmlWriter.writeEndDocument();
 }
+
+}  // namespace qmodsorter

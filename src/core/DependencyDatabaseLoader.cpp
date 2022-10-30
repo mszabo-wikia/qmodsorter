@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+namespace qmodsorter {
 
 void DependencyDatabaseLoader::loadDependencyDatabase(
     ModManifestList &modManifestList) {
@@ -72,3 +73,5 @@ void DependencyDatabaseLoader::addLoadBottomRules(
     }
   }
 }
+
+}  // namespace qmodsorter

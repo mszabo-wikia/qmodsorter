@@ -6,6 +6,8 @@
 #include "ModManifestList.hpp"
 #include "Settings.hpp"
 
+namespace qmodsorter {
+
 /**
  * @brief Handles loading dependency information from RimPy's community rules
  * file.
@@ -34,4 +36,5 @@ class DependencyDatabaseLoader {
                           const QJsonObject &modObject);
 };
 
+}  // namespace qmodsorter
 #endif

@@ -6,6 +6,8 @@
 
 #include "MainWindow.hpp"
 
+using namespace qmodsorter;
+
 int main(int argc, char **argv) {
   QApplication app(argc, argv);
   Settings settings;

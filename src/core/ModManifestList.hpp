@@ -7,6 +7,8 @@
 
 #include "ModManifest.hpp"
 
+namespace qmodsorter {
+
 /**
  * @brief Holds all known mods and their dependency information.
  */
@@ -82,4 +84,5 @@ class ModManifestList {
   std::set<std::pair<QString, QString>> dependencies;
 };
 
+}  // namespace qmodsorter
 #endif

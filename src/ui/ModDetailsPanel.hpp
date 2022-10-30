@@ -5,6 +5,8 @@
 #include <QLabel>
 #include <QWidget>
 
+namespace qmodsorter {
+
 /**
  * @brief Widget that displays details (description etc.) for a single mod.
  */
@@ -27,5 +29,7 @@ class ModDetailsPanel : public QWidget {
   QLabel* path;
   QLabel* description;
 };
+
+}  // namespace qmodsorter
 
 #endif

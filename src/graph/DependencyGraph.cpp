@@ -7,6 +7,8 @@
 #include "CircularDependencies.hpp"
 #include "Node.hpp"
 
+namespace qmodsorter {
+
 DependencyGraph::DependencyGraph(
     const QStringList &activeModIds, const QStringList &knownExpansionIds,
     const std::set<std::pair<QString, QString>> &dependencies)
@@ -174,3 +176,5 @@ void DependencyGraph::depthFirstTraverse(
 
   root->updateDiscoveryState(NodeDiscoveryState::Finished);
 }
+
+}  // namespace qmodsorter

@@ -10,6 +10,8 @@
 #include "ModManifest.hpp"
 #include "ModManifestList.hpp"
 
+namespace qmodsorter {
+
 namespace fs = std::filesystem;
 
 /**
@@ -33,4 +35,6 @@ class ModDataLoader {
                     ModManifestList &ModManifestList);
   void readLoadOrderRules(std::vector<QString> &loadOrderRules);
 };
+
+}  // namespace qmodsorter
 #endif

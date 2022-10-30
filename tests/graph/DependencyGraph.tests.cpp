@@ -3,6 +3,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <string>
 
+using namespace qmodsorter;
+
 TEST_CASE("DependencyGraph can sort a basic modlist", "[DependencyGraph]") {
   QStringList mods;
   std::set<std::pair<QString, QString>> dependencies;

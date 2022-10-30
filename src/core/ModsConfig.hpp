@@ -4,6 +4,8 @@
 #include <QList>
 #include <QString>
 
+namespace qmodsorter {
+
 class ModsConfig {
  public:
   QString getVersion() const noexcept { return version; }
@@ -25,5 +27,7 @@ class ModsConfig {
   QStringList activeMods;
   QStringList knownExpansions;
 };
+
+}  // namespace qmodsorter
 
 #endif

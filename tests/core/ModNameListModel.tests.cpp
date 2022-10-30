@@ -1,6 +1,8 @@
 #include <ModNameListModel.hpp>
 #include <catch2/catch_test_macros.hpp>
 
+using namespace qmodsorter;
+
 TEST_CASE("ModNameListModel sets appropriate flags", "[ModNameListModel]") {
   ModNameListModel model;
   model.setStringList({"test", "foo"});

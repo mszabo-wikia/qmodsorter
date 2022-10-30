@@ -4,6 +4,8 @@
 #include <QString>
 #include <vector>
 
+namespace qmodsorter {
+
 /**
  * @brief Represents the discovery state of a node during a DF scan of the
  * graph.
@@ -100,5 +102,7 @@ the graph.
   NodeDiscoveryState discoveryState;
   Node *predecessor;
 };
+
+}  // namespace qmodsorter
 
 #endif
