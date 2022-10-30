@@ -1,8 +1,6 @@
 #ifndef MAIN_WINDOW_HPP
 #define MAIN_WINDOW_HPP
 
-#include <qtabwidget.h>
-
 #include <ModDataLoader.hpp>
 #include <ModManifest.hpp>
 #include <ModManifestList.hpp>

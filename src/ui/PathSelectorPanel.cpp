@@ -20,7 +20,8 @@ PathSelectorPanel::PathSelectorPanel(const QString &defaultValue)
           &PathSelectorPanel::onSelectPathButtonClicked);
 }
 
-void PathSelectorPanel::setDirectorySelector(bool isDirectorySelector) {
+void PathSelectorPanel::setDirectorySelector(
+    bool isDirectorySelector) noexcept {
   this->isDirectorySelector = isDirectorySelector;
 }
 

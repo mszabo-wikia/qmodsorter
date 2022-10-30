@@ -53,7 +53,7 @@ class ModManifestList {
    *
    * @return const QMap<QString, ModManifest>&
    */
-  const QMap<QString, ModManifest> &getMods();
+  const QMap<QString, ModManifest> &getMods() const noexcept;
   /**
    * @brief Add a new mod to the set of known mods.
    *
@@ -72,7 +72,7 @@ class ModManifestList {
    *
    * @return const std::set<std::pair<QString, QString>>&
    */
-  const std::set<std::pair<QString, QString>> &getDependencies() const;
+  const std::set<std::pair<QString, QString>> &getDependencies() const noexcept;
 
   void clear();
 

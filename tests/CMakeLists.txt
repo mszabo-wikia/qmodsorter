@@ -10,6 +10,7 @@ add_executable(tests
   graph/DependencyGraph.tests.cpp
   core/SettingsLoader.tests.cpp
   core/ModDataLoader.tests.cpp
+  core/ModNameListModel.tests.cpp
 )
 target_link_libraries(tests PRIVATE qmodsorter-core qmodsorter-graph Qt::Core Catch2::Catch2WithMain)
 

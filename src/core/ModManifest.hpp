@@ -12,14 +12,16 @@ namespace fs = std::filesystem;
 class ModManifest {
  public:
   ModManifest() {}
-  const QString &getName() const { return name; }
-  const QString &getPackageId() const { return packageId; }
-  const fs::path &getFolder() const { return folder; }
-  const QString &getDescription() const { return description; }
-  void setName(QString name) { this->name = name; }
-  void setPackageId(QString packageId) { this->packageId = packageId; }
-  void setFolder(const fs::path folder) { this->folder = folder; }
-  void setDescription(QString description) { this->description = description; }
+  const QString &getName() const noexcept { return name; }
+  const QString &getPackageId() const noexcept { return packageId; }
+  const fs::path &getFolder() const noexcept { return folder; }
+  const QString &getDescription() const noexcept { return description; }
+  void setName(QString name) noexcept { this->name = name; }
+  void setPackageId(QString packageId) noexcept { this->packageId = packageId; }
+  void setFolder(const fs::path folder) noexcept { this->folder = folder; }
+  void setDescription(QString description) noexcept {
+    this->description = description;
+  }
 
  private:
   QString name;

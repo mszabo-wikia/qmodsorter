@@ -6,13 +6,17 @@
 
 class ModsConfig {
  public:
-  QString getVersion() const { return version; }
-  const QStringList &getActiveMods() const { return activeMods; }
-  const QStringList &getKnownExpansions() const { return knownExpansions; };
+  QString getVersion() const noexcept { return version; }
+  const QStringList &getActiveMods() const noexcept { return activeMods; }
+  const QStringList &getKnownExpansions() const noexcept {
+    return knownExpansions;
+  };
 
-  void setVersion(QString version) { this->version = version; }
-  void setActiveMods(QStringList activeMods) { this->activeMods = activeMods; }
-  void setKnownExpansions(QStringList knownExpansions) {
+  void setVersion(QString version) noexcept { this->version = version; }
+  void setActiveMods(QStringList activeMods) noexcept {
+    this->activeMods = activeMods;
+  }
+  void setKnownExpansions(QStringList knownExpansions) noexcept {
     this->knownExpansions = knownExpansions;
   }
 

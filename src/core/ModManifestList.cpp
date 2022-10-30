@@ -23,7 +23,7 @@ bool ModManifestList::hasModWithPackageId(const QString &packageId) const {
   return modsByPackageId.contains(packageId);
 }
 
-const QMap<QString, ModManifest> &ModManifestList::getMods() {
+const QMap<QString, ModManifest> &ModManifestList::getMods() const noexcept {
   return modsByName;
 }
 
@@ -33,11 +33,11 @@ void ModManifestList::addModManifest(ModManifest modManifest) {
 }
 
 void ModManifestList::addModDependency(QString dependency, QString dependent) {
-  dependencies.insert(std::pair(dependency, dependent));
+  dependencies.insert(std::make_pair(dependency, dependent));
 }
 
 const std::set<std::pair<QString, QString>> &ModManifestList::getDependencies()
-    const {
+    const noexcept {
   return dependencies;
 }
 

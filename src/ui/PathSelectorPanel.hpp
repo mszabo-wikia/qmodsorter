@@ -23,7 +23,7 @@ class PathSelectorPanel : public QWidget {
    * @brief Set whether this panel should select directories or files.
    *
    */
-  void setDirectorySelector(bool);
+  void setDirectorySelector(bool) noexcept;
   QString getPathName() const;
 
  private slots:
