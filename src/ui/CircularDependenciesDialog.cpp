@@ -21,7 +21,7 @@ CircularDependenciesDialog::CircularDependenciesDialog(
 
   const auto& circles = circularDependencies.getCircles();
 
-  for (auto i = 0; i < circles.size(); i++) {
+  for (size_t i = 0; i < circles.size(); i++) {
     auto separator = new QFrame();
 
     separator->setFrameShape(QFrame::HLine);
@@ -31,7 +31,7 @@ CircularDependenciesDialog::CircularDependenciesDialog(
         new QLabel(QString::fromStdString("(" + std::to_string(i + 1) + ")"));
     QString circleAsString;
 
-    for (auto j = 0; j < circles[i].size(); j++) {
+    for (size_t j = 0; j < circles[i].size(); j++) {
       circleAsString +=
           modManifestList.getModByPackageId(circles[i][j]).getName();
       if (j < circles[i].size() - 1) {
@@ -41,9 +41,9 @@ CircularDependenciesDialog::CircularDependenciesDialog(
     auto loop = new QLabel(circleAsString.toHtmlEscaped());
     loop->setContentsMargins(0, 9, 0, 9);
 
-    mainLayout->addWidget(separator, i + 1, 0, 1, 2);
-    mainLayout->addWidget(index, i + 2, 0);
-    mainLayout->addWidget(loop, i + 2, 1);
+    mainLayout->addWidget(separator, static_cast<int>(i) + 1, 0, 1, 2);
+    mainLayout->addWidget(index, static_cast<int>(i) + 2, 0);
+    mainLayout->addWidget(loop, static_cast<int>(i) + 2, 1);
   }
 
   auto okButton = new QPushButton("OK");
@@ -51,7 +51,8 @@ CircularDependenciesDialog::CircularDependenciesDialog(
 
   connect(okButton, &QPushButton::clicked, this, &QDialog::accept);
 
-  mainLayout->addWidget(okButton, circles.size() + 2, 0, 1, 2, Qt::AlignCenter);
+  mainLayout->addWidget(okButton, static_cast<int>(circles.size()) + 2, 0, 1, 2,
+                        Qt::AlignCenter);
 
   setLayout(mainLayout);
 }

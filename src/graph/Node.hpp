@@ -43,9 +43,7 @@ the graph.
    *
    * @return const std::vector<Node *>::size_type
    */
-  const std::vector<Node *>::size_type getIndex() const noexcept {
-    return index;
-  }
+  std::vector<Node *>::size_type getIndex() const noexcept { return index; }
 
   /**
    * @brief Get the list of nodes this node has outgoing edges to (i.e. its

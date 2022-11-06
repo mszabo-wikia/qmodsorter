@@ -12,6 +12,7 @@ add_executable(tests
   core/ModDataLoader.tests.cpp
   core/ModNameListModel.tests.cpp
 )
+target_compile_options(tests PRIVATE ${QMODSORTER_CXXFLAGS})
 target_link_libraries(tests PRIVATE qmodsorter-core qmodsorter-graph Qt::Core Catch2::Catch2WithMain)
 
 include(Catch)

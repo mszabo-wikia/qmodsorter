@@ -70,12 +70,12 @@ void ModDataLoader::readAboutXml(const fs::path &modFolder,
     modManifest.setName(modFolder.filename().c_str());
   }
 
-  for (const auto dependency : loadAfter) {
+  for (const auto &dependency : loadAfter) {
     modManifestList.addModDependency(dependency.toLower(),
                                      modManifest.getPackageId());
   }
 
-  for (const auto dependent : loadBefore) {
+  for (const auto &dependent : loadBefore) {
     modManifestList.addModDependency(modManifest.getPackageId(),
                                      dependent.toLower());
   }

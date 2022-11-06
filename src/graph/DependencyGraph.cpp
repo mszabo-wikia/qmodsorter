@@ -12,8 +12,8 @@ namespace qmodsorter {
 DependencyGraph::DependencyGraph(
     const QStringList &activeModIds, const QStringList &knownExpansionIds,
     const std::set<std::pair<QString, QString>> &dependencies)
-    : nodes(activeModIds.size()) {
-  auto i = 0;
+    : nodes(static_cast<size_t>(activeModIds.size())) {
+  size_t i = 0;
   QHash<QString, Node *> nodesById;
 
   for (const auto &packageId : activeModIds) {

@@ -12,7 +12,7 @@ class ModsConfig {
   const QStringList &getActiveMods() const noexcept { return activeMods; }
   const QStringList &getKnownExpansions() const noexcept {
     return knownExpansions;
-  };
+  }
 
   void setVersion(QString version) noexcept { this->version = version; }
   void setActiveMods(QStringList activeMods) noexcept {
