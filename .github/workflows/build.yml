@@ -26,7 +26,7 @@ jobs:
 
       - name: Cache build output
         id: cache-build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: build
           key: ${{ runner.os }}-build
